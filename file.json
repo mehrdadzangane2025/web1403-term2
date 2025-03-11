@@ -1,0 +1,23 @@
+{
+    "data": [
+        {
+            "name": "amin",
+            "family": "roohbakhsh",
+            "email": "ali@gmail.com"
+        },
+        {
+            "name": "reza",
+            "family": "roohbakhsh",
+            "email": "ali@gmail.com"
+        },
+        {
+            "name": "ss",
+            "family": "safs"
+        },
+        {
+            "name": "reza",
+            "family": "ss",
+            "email": "dd"
+        }
+    ]
+}
