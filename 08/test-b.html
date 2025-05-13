@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>page 1</title>
+</head>
+<body>
+    <b>Salam !</b>
+    <script>
+        async function getData() {
+            const url = "http://127.0.0.1/sum/5/7";
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    console.log('ERROR.')
+                }
+                else{
+                    const json = await response.json();
+                    console.log(json);
+                }                
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+        getData();
+    </script>
+</body>
+</html>

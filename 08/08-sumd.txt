@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        #result{display:block; background-color: aqua; width: 100px;height: 100px;}
+
+    </style>
+</head>
+<body>
+
+    name<input type="text" id = "a">
+    pass <input type="text" id = "b">
+    <input type="button" id = "c" value="calc">
+    <div id="result"></div>
+    <script>
+
+async function getData(){
+    let val1 = document.getElementById("a").value;
+    let val2 = document.getElementById("b").value;
+    const url = "http://127.0.0.1/token";
+    try{
+        const response = await fetch(url, {
+            method:"POST",
+            body: JSON.stringify({user:val1, pass:val2})
+        });
+        if(!response.ok)
+        {
+            console.log("error");
+        
+        }else{
+            const json = await response.json();
+            let result = document.createElement("div");
+
+            document.getElementById("result").appendChild(result).innerHTML = json.toString();
+            console.log(json);
+        }
+    } catch(error){
+        console.error(error.message);
+    }
+}
+document.getElementById("c").addEventListener("click", function(){
+    getData();
+})
+
+    </script>
+    
+
+    
+</body>
+</html>
