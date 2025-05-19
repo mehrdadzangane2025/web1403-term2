@@ -45,7 +45,7 @@ else if(command === 'create')
         let objValue = JSON.parse(data);
         objValue.data.push(person);
 
-        fs.writeFile('./file.json', JSON.stringify(objValue), functiopn(err, data){
+        fs.writeFile('./file.json', JSON.stringify(objValue), function(err, data){
             if(err){
                 console.log('error', err)
             }
