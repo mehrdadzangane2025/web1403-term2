@@ -1,12 +1,11 @@
-let fs = require('fs');
-
+import {writeFile, readFile} from 'fs'
 let input = process.argv.slice(3);
 let command = process.argv[2];
 
 if (command === 'sum') {
     console.log(Number(input[0]) + Number(input[1]));
 }
-else if (command === 'minus') {
+else if (command === 'minus') { 
 
     console.log(Number(input[0]) - Number(input[1]));
 }
@@ -28,7 +27,7 @@ else if (command === 'write') {
         email: input[2]
     }
 
-    fs.writeFile('./data.txt', JSON.stringify(person), function (error, data) {
+    writeFile('./data.txt', JSON.stringify(person), function (error, data) {
         if (error) {
             console.log('ERROR:', error);
         }
@@ -37,7 +36,7 @@ else if (command === 'write') {
     })
 }
 else if (command === 'create') {
-    fs.readFile('./file.json', (err, data) => {
+    readFile('./file.json', (err, data) => {
         if (err) {
             console.log('ERROR:', error);
         }
@@ -50,7 +49,7 @@ else if (command === 'create') {
         let objValue = JSON.parse(data);
         objValue.data.push(person);
 
-        fs.writeFile('./file.json', JSON.stringify(objValue), function (error, data) {
+        writeFile('./file.json', JSON.stringify(objValue), function (error, data) {
             if (error) {
                 console.log('ERROR:', error);
             }
@@ -62,12 +61,12 @@ else if (command === 'create') {
     })
 }
 else if(command === 'read'){
-    fs.readFile('./file.json' , (err , data)=>{
+    readFile('./file.json' , (err , data)=>{
         if (err) {
             console.log('ERROR:', err);
         }
 
-        console.log('SUCCESS:', data);
+        console.log('SUCCESS:', JSON.parse(data));
     })
 }
 else {
