@@ -4,7 +4,7 @@ const server = creatServer((req, res) => {
     let body = ""
     req.on("data", (chunck) => {
 
-        body += chunck;
+        body += chunck.toString();
     })
 
     req.on("end", () => {
