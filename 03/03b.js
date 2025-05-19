@@ -1,16 +1,14 @@
-let fs = require('fs');
+import { writeFile, readFile } from 'fs'
 
 let input = process.argv.slice(3);
 let command = process.argv[2];
 
 if (command === 'sum') {
     console.log(Number(input[0]) + Number(input[1]));
-}
-else if (command === 'minus') {
+} else if (command === 'minus') {
 
     console.log(Number(input[0]) - Number(input[1]));
-}
-else if (command === 'print') {
+} else if (command === 'print') {
     let obj = {
         name: input[0],
         family: input[1],
@@ -20,24 +18,22 @@ else if (command === 'print') {
     for (key in obj) {
         console.log(`value is ${obj[key]}`);
     }
-}
-else if (command === 'write') {
+} else if (command === 'write') {
     let person = {
         name: input[0],
         family: input[1],
         email: input[2]
     }
 
-    fs.writeFile('./data.txt', JSON.stringify(person), function (error, data) {
+    writeFile('./data.txt', JSON.stringify(person), function(error, data) {
         if (error) {
             console.log('ERROR:', error);
         }
 
         console.log('SUCCESS:', data);
     })
-}
-else if (command === 'create') {
-    fs.readFile('./file.json', (err, data) => {
+} else if (command === 'create') {
+    readFile('./file.json', (err, data) => {
         if (err) {
             console.log('ERROR:', error);
         }
@@ -50,47 +46,40 @@ else if (command === 'create') {
         let objValue = JSON.parse(data);
         objValue.data.push(person);
 
-        fs.writeFile('./file.json', JSON.stringify(objValue), function (error, data) {
+        writeFile('./file.json', JSON.stringify(objValue), function(error, data) {
             if (error) {
                 console.log('ERROR:', error);
             }
-    
+
             console.log('SUCCESS:', data);
         })
 
-        
-    })
-}
-else if(command === 'read'){
-    fs.readFile('./file.json' , (err , data)=>{
-        if (err) {
-            console.log('ERROR:', err);
-        }
 
-        console.log('SUCCESS:', data);
     })
-}
-else if(command === 'read' && person){
-    fs.readFile('./file.json','utf8' , (err , data)=>{
+} else if (command === 'read') {
+    readFile('./file.json', 'utf8', (err, data) => {
         if (err) {
             console.log('ERROR:', err);
         }
-        if (input.length === 0){
+        if (input.length === 0) {
             console.log('File Data:', JSON.parse(data));
-        }
-        else {
+        } else {
             let objValue = JSON.parse(data);
-
-            for (let index = 0; index < objValue.data.length; index++) {
-                if(input[0] === objValue.data[index].name){
-                   console.log(objValue.data[index]);
+            let found = false;
+            for (let i = 0; i < objValue.data.length; i++) {
+                if (input[0] === objValue.data[i].name) {
+                    found = true;
+                    console.log(objValue.data[i]);
                 }
-                
+            }
+            if (!found) {
+                console.log('item not found!');
+
             }
         }
 
-        
-    })}
-else {
+
+    })
+} else {
     console.log('Command not found');
 }
