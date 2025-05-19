@@ -1,1 +1,7 @@
-{"data":[{"name":"ali","family":"rezaee","email":"ale@gmail.com"}]}
+{
+    "data": [
+        { "name": "ali", "family": "rezaee", "email": "ale@gmail.com" },
+        { "name": "a", "family": "d", "email": "f" },
+        { "name": "g", "family": "f", "email": "d" }
+    ]
+}
