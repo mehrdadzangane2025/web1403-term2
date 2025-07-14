@@ -24,6 +24,11 @@
       "user": "mehrdad",
       "email": "mehrdad@gmail.com",
       "pass": "123"
+    },
+    {
+      "user": "mehran",
+      "email": "mehran@gmail.com",
+      "pass": "123"
     }
   ]
 }

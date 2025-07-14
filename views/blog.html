@@ -190,13 +190,10 @@
         const logoutBtn = document.getElementById('logoutBtn');
         const messageDiv = document.getElementById('message');
 
-        // بررسی اعتبار توکن
         checkAuth();
 
-        // بارگذاری بلاگ‌ها
         loadBlogs();
 
-        // ارسال بلاگ جدید
         blogForm.addEventListener('submit', async(e) => {
             e.preventDefault();
             const title = document.getElementById('title').value;
@@ -267,7 +264,7 @@
                 blogCard.innerHTML = `
                     <h3 class="blog-title">${blog.title}</h3>
                     <p class="blog-body">${blog.body}</p>
-                    <button class="delete-btn" data-id="${blog.id}">حذف</button>
+                    <button class="delete-btn" data-id="${blog.id}">X</button>
                 `;
                 blogsList.appendChild(blogCard);
             });

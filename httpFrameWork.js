@@ -1,5 +1,6 @@
 import { createServer } from 'http';
-const PORT = 1405;
+import { PORT } from "./.env"
+
 let controllers = [];
 
 

@@ -6,8 +6,7 @@ import jwt from "jsonwebtoken";
 const __filename = fileURLToPath(
     import.meta.url);
 const __dirname = dirname(__filename);
-const JWT_SECRET = "Sec";
-const TOKEN_TIME = 40;
+import { TOKEN_TIME, JWT_SECRET } from "./.env"
 
 
 //d
@@ -49,6 +48,7 @@ function generateId() {
 function verifyToken(token) {
     try {
         let decoded = jwt.verify(token, JWT_SECRET);
+
         if (
             Date.now() / 1000 - decoded.iat < TOKEN_TIME &&
             isValidUser(decoded.user)
