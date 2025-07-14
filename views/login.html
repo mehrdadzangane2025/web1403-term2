@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود به سیستم</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .auth-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo-circle {
+            width: 100%;
+            height: 100%;
+            border: 15px solid #e6f7ff;
+            border-radius: 50%;
+            position: absolute;
+            animation: pulse 2s infinite;
+        }
+        
+        .logo-icon {
+            font-size: 50px;
+            color: #1e90ff;
+            position: relative;
+        }
+        
+        h1 {
+            color: #2f3542;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #57606f;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #dfe4ea;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        input:focus {
+            border-color: #1e90ff;
+            box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
+        }
+        
+        .auth-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #1e90ff, #70a1ff);
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(30, 144, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .auth-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(30, 144, 255, 0.4);
+        }
+        
+        .switch-text {
+            margin-top: 25px;
+            color: #57606f;
+        }
+        
+        .switch-link {
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        
+        .message {
+            margin: 15px 0;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
+        }
+        
+        .success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 15px rgba(30, 144, 255, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(30, 144, 255, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="auth-container">
+        <div class="logo">
+            <div class="logo-circle"></div>
+            <div class="logo-icon">🔒</div>
+        </div>
+
+        <h1>ورود به حساب کاربری</h1>
+
+        <div id="message" class="message"></div>
+
+        <form id="authForm">
+            <div class="form-group">
+                <label for="username">نام کاربری</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">رمز عبور</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="auth-btn">ورود</button>
+        </form>
+
+        <p class="switch-text">
+            حساب کاربری ندارید؟
+            <a href="/page/signup.html" class="switch-link">ثبت نام کنید</a>
+        </p>
+    </div>
+
+    <script>
+        const authForm = document.getElementById('authForm');
+        const messageDiv = document.getElementById('message');
+
+        authForm.addEventListener('submit', async(e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user: username,
+                        pass: password
+                    }),
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    showMessage('ورود موفقیت آمیز بود. در حال انتقال...', 'success');
+                    setTimeout(() => {
+                        window.location.href = '/page/blog.html';
+                    }, 1000);
+                } else {
+                    showMessage(result || 'نام کاربری یا رمز عبور نادرست است', 'error');
+                }
+            } catch (error) {
+                showMessage('خطا در ارتباط با سرور', 'error');
+            }
+        });
+
+        function showMessage(message, type) {
+            messageDiv.textContent = message;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

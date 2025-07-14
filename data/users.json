@@ -1,0 +1,29 @@
+{
+  "records": [
+    {
+      "user": "ali",
+      "pass": "123",
+      "mail": "ali@gmail.com"
+    },
+    {
+      "user": "reza",
+      "pass": "123",
+      "mail": "reza@gmail.com"
+    },
+    {
+      "user": "amin",
+      "pass": "123",
+      "mail": "amin@gmail.com"
+    },
+    {
+      "user": "mmd",
+      "pass": "123",
+      "mail": "mmd@mail.com"
+    },
+    {
+      "user": "mehrdad",
+      "email": "mehrdad@gmail.com",
+      "pass": "123"
+    }
+  ]
+}
