@@ -1,5 +1,6 @@
 import { writeFile, readFile, readFileSync } from "fs";
 import { use, start, write } from "./httpFrameWork.js";
+import { getFilePath } from "./controllers/userController.js";
 import { join, dirname, extname } from "path";
 import { fileURLToPath } from "url";
 import jwt from "jsonwebtoken";
@@ -7,15 +8,9 @@ const __filename = fileURLToPath(
     import.meta.url);
 const __dirname = dirname(__filename);
 import { TOKEN_TIME, JWT_SECRET } from "./.env"
-
-
-//d
-
-/*asda*/
-
 //
-
-
+//import
+//
 function isValidUser(userPayload) {
     const filePath = join(__dirname, "data", "users.json");
 
@@ -41,8 +36,8 @@ function isValidUser(userPayload) {
 
 function generateId() {
     let randomNumber = Math.floor(Math.random() * 100000000);
-    let Id = String(randomNumber).padStart(8, "0");
-    return Id;
+    let id = String(randomNumber).padStart(8, "0");
+    return id;
 }
 
 function verifyToken(token) {
@@ -148,35 +143,7 @@ use("GET", "page", function(req, res) {
 // POST * Signup
 
 use("POST", "api/signup", function(req, res) {
-    const filePath = join(__dirname, "data", "users.json");
-
-    readFile(filePath, "utf8", function(err, data) {
-        if (err) {
-            console.log("err:", err);
-            write(res, 500, "err:" + err);
-        } else {
-            let dataObject = JSON.parse(data);
-            for (let item of dataObject.records) {
-                if (item.user === req.data.user) {
-                    write(res, 403, JSON.stringify("User exists"));
-                    return;
-                }
-            }
-
-            dataObject.records.push(req.data);
-            const dataString = JSON.stringify(dataObject, null, 2);
-
-            writeFile(filePath, dataString, function(err) {
-                if (err) {
-                    console.log("err:", err);
-                    write(res, 500, "err:" + err);
-                } else {
-                    console.log("Signup done");
-                    write(res, 200, JSON.stringify("Signup done"));
-                }
-            });
-        }
-    });
+    getFilePath(req, res)
 });
 
 // POST * login

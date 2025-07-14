@@ -29,6 +29,16 @@
       "user": "mehran",
       "email": "mehran@gmail.com",
       "pass": "123"
+    },
+    {
+      "user": "123",
+      "email": "123@gmail.com",
+      "pass": "132"
+    },
+    {
+      "user": "aliali",
+      "email": "aliali@gmail.com",
+      "pass": "123"
     }
   ]
 }

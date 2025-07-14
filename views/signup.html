@@ -242,10 +242,15 @@
                         window.location.href = '/page/login.html';
                     }, 1500);
                 } else {
-                    showMessage(result || 'خطا در ثبت نام', 'error');
+                    if (result.type === "duplicate_user") {
+                        showMessage(result.message, 'error');
+                    } else {
+                        showMessage(result.message || 'خطا در ثبت نام', 'error');
+                    }
                 }
             } catch (error) {
                 showMessage('خطا در ارتباط با سرور', 'error');
+                console.error('Error:', error);
             }
         });
 
